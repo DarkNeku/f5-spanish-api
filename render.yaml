@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: f5-spanish-tts-api
+    env: docker
+    plan: starter
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.10"
+      - key: HF_HOME
+        value: /app/.cache/huggingface
+      - key: TRANSFORMERS_CACHE
+        value: /app/.cache/transformers
+      - key: TORCH_HOME
+        value: /app/.cache/torch
+    disk:
+      name: f5-tts-cache
+      mountPath: /app/.cache
+      sizeGB: 10
